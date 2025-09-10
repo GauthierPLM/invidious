@@ -24,10 +24,10 @@ services:
           # IF you are using a reverse proxy OR accessing invidious from an external IP then you NEED to change this value
           # Please consult for more doc: https://github.com/unixfox/invidious/blob/invidious-companion/config/config.example.yml#L57-L88
           # And make sure to add the routes from the post install when using a reverse proxy!
-            public_url: "http://localhost:8282"
+            public_url: ${SERVICE_URL_INVIDIOUSCOMPANION}
           # IT is NOT recommended to use the same key as HMAC KEY. Generate a new key!
           # Use the key generated in the 2nd step
-          invidious_companion_key: ${SERVICE_REALBASE64_INVIDIOUSCOMPANION}
+          invidious_companion_key: ${INVIDIOUS_COMPANION_SECRET_KEY}
           external_port: 443
           domain: ${SERVICE_URL_INVIDIOUS}
           https_only: true
@@ -50,7 +50,7 @@ services:
     image: quay.io/invidious/invidious-companion:latest
     environment:
       - SERVICE_URL_INVIDIOUSCOMPANION_8282
-      - SERVER_SECRET_KEY=${SERVICE_REALBASE64_INVIDIOUSCOMPANION}
+      - SERVER_SECRET_KEY=${INVIDIOUS_COMPANION_SECRET_KEY}
     logging:
       options:
         max-size: "1G"
